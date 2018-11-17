@@ -5,9 +5,10 @@ const webpack = require('webpack');       //webpack打包工具
 const VueLoaderPlugin = require('vue-loader/lib/plugin');         // vue-loader 编译vue文件
 const compiler = require('vue-template-compiler')            // 模板函数编译 与vue-loader配合使用
 
+var entry_prefix = 'route_';
 module.exports = {
     entry: {       //入口
-        "app": "./src/index.js"
+        "app": "./src/"+entry_prefix+"index.js"
     },
     module: {            //处理项目中的不同类型的模块。
         rules: [      // rules 各种规则(数组类型) 每个规则可以分为三部分 - 条件(condition)，结果(result)和嵌套规则(nested rule)
@@ -33,13 +34,13 @@ module.exports = {
         new HtmlWebpackPlugin({            // 构建html
             filename: 'index.html',      //文件名
             title: 'my-vue-cli',            //title
-            template: './src/index.html',       //参照模板样式
+            template: './src/'+entry_prefix+'index.html',       //参照模板样式
         }),
         new webpack.HotModuleReplacementPlugin(),  //热模块替换开启
         new VueLoaderPlugin()                 //vue-loader插件开启
     ],
     output: {        //出口
-        filename: 'index.js',    //文件名
+        filename: '[name].bundle.js',    //文件名
         path: path.resolve(__dirname, 'dist'),   //路径
         publicPath: ""        //srcript 引入路径
     },
